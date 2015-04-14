@@ -12,11 +12,13 @@ matrix:
     fast_finish: true
 
 before_build:
-    - if "%platform%"=="Win32" cmake -G"Visual Studio 10"
-    - if "%platform%"=="64" cmake -G"Visual Studio 10 Win64"
+    - if "%platform%"=="Win32" cmake -G"Visual Studio 12"
+    - if "%platform%"=="64" cmake -G"Visual Studio 12 Win64"
 
 build:
     project: SOCI.sln
+    parallel: true
+    verbosity: detailed
 
 test_script:
     - ctest -C %configuration% -VV
