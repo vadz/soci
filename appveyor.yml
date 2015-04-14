@@ -1,0 +1,21 @@
+version: 4.0.0.{build}
+
+platform:
+    - x86
+    - x64
+
+configuration:
+    - Debug
+    - Release
+
+matrix:
+    fast_finish: true
+
+before_build:
+    - cmake -G "Visual Studio 10" .
+
+build:
+    project: SOCI.sln
+
+test_script:
+    - ctest -VV
