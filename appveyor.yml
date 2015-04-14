@@ -1,7 +1,7 @@
 version: 4.0.0.{build}
 
 platform:
-    - x86
+    - Win32
     - x64
 
 configuration:
@@ -12,10 +12,11 @@ matrix:
     fast_finish: true
 
 before_build:
-    - cmake -G "Visual Studio 10" .
+    - if "%platform%"=="Win32" cmake -G"Visual Studio 10"
+    - if "%platform%"=="64" cmake -G"Visual Studio 10 Win64"
 
 build:
     project: SOCI.sln
 
 test_script:
-    - ctest -VV
+    - ctest -C %configuration% -VV
